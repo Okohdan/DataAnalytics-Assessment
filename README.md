@@ -6,20 +6,26 @@ This README explains the SQL logic used in the assessment queries. Each section 
 ---
 
 ## Assessment_Q1
-
 ### Objective:
-Aggregate customer activity across Savings and Investment plans.
+This query summarizes each user's total savings and investments by:
 
-### Sections:
-- Savings aggregation: `savings_savingsaccount`
-- Regular savings investments: `plans_plan` with `is_regular_savings = 1`
-- Fund investments: `plans_plan` with `is_a_fund = 1`
+### Logic:
+- Using CTEs to pre-aggregate data from `savings_savingsaccount` and `plans_plan`.
+- Filtering:
+  - `is_regular_savings = 1` for regular savings.
+  - `is_a_fund = 1` for fund-based investments.
+- Joining with `users_customuser` to link financial data to user profiles.
+- Calculating **Total Deposits** as the sum of savings and investments.
+- Formatting results using `FORMAT()` and ensuring null safety with `IFNULL()`.
+- Applying meaningful aliases like `Savings Count`, `Investment Count`, and `Total Deposits` for clarity.
 
-### Key Metrics:
-- Total count and value per category
-- Sum of deposits across all categories
-- Joined by `owner_id`
----
+### Challenges Addressed
+
+- **Ambiguous Grouping**: Solved using CTEs to simplify the final query.
+- **ONLY_FULL_GROUP_BY Error**: Avoided by ensuring proper grouping of non-aggregated columns.
+- **Null Handling**: Prevented errors using `IFNULL()` in calculations.
+- **Unclear Labels**: Resolved with user-friendly aliases in the output.
+
 
 ## Assessment_Q2
 
