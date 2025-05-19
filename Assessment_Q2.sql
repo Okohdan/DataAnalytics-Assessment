@@ -9,7 +9,7 @@ WITH customer_tx AS (
     GROUP BY s.owner_id
 ),
 
--- Step 2: Compute average tx per month + category
+-- Step 2: Compute average transaction (tx) per month + category
 frequency_classified AS (
     SELECT 
         c.owner_id,
